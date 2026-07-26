@@ -1,0 +1,38 @@
+已知
+AUTH_TOKEN
+密钥:XrayUI_Secret2025_ChangeThisRandomString_abc123xyz789逆向出来的
+API接口
+域名:user.xxfanqiang.com
+移动版:
+注册帐号：curl -s -X POST https://user.xxfanqiang.com/b/reg -d "email=$(date +%s)_$(head -c 8 /dev/urandom | xxd -p)@qq.com&pass=123456&tg=star&ver=1&token=" | python -m json.tool
+返回:{"code":200,"data":{"usertoken":"b2eac2c5001dede604676d3336a74de1","quota":"50GB"}}
+订阅:GET /b/subscribe?token={usertoken}也就是GET https://user.xxfanqiang.com/b/subscribe?token=b2eac2c5001dede604676d3336a74de1
+返回:vless://YXV0bzpiYjk4NjE4MS03MDNhLTRjN2YtYjE4Ny0yNzE1ZmU4MjU0OGRANDMuMTY1LjE2Ny42NTo0NDM?remarks=日本链路,2026-07-28日到期&tls=1&peer=learn.microsoft.com&alpn=h2,http/1.1&h2=1&xtls=2&pbk=fjaI5XII9Scyt0MZ-otAqbYSzSlp57ULotBdRrGU-Ck&sid=0a2cfcc432c91a7a
+vless://YXV0bzpiMzNmOGUzZS1lYmJjLTRkMjQtOTM2My0wOTdlNWM2Y2E1NWRANDMuMTYwLjI0Ni42Mzo0NDM?remarks=新加坡链路,2026-07-28日到期&tls=1&peer=learn.microsoft.com&alpn=h2,http/1.1&h2=1&xtls=2&pbk=Fux7D0GO1NdHGJ1k1-4XHRlMkPknxXb8j_1ZfnXY4gs&sid=f7f9c2c4e327dc8a
+vless://YXV0bzo3NTljMzZjNS1lZDM2LTRiMzctYTVhMC05NDk5N2QxMDA0MzJANDMuMTYyLjEyNy4yMzo0NDM?remarks=韩国链路,2026-07-28日到期&tls=1&peer=learn.microsoft.com&alpn=h2,http/1.1&h2=1&xtls=2&pbk=I0XvH-akUrxUdLed6scJvV3B_2edvRr-chG_8ocUAAc&sid=2f0584f4180e8aa6
+格式：用户名:ID@服务器IP:端口
+PC版:
+注册:GET /user/reg.aspx?mode=pc&pwd=123456&clientid={base64}&user={username}&username={username}
+返回:自定义Base64编码的"用户名|key|..."
+配置:GET /user/cfg.aspx?key={key}&ip=127.0.0.1&clientid={clientid}&mode=pc
+返回:自定义Base64编码的节点列表(免费账号返回"没有符合服务器")
+用户:GET /user/userinfo.aspx?key={key}&clientid={clientid}
+返回:"用户名|key|上传|下载|已用|流量|到期|套餐描述|..."
+节点
+日本:43.165.167.65:443
+UUID:bb986181-703a-4c7f-b187-2715fe82548d
+PublicKey:fjaI5XII9Scyt0MZ-otAqbYSzSlp57ULotBdRrGU-Ck
+ShortId:0a2cfcc432c91a7a
+新加坡:43.160.246.63:443
+UUID:b33f8e3e-ebbc-4d24-9363-097e5c6ca58d
+PublicKey:Fux7D0GO1NdHGJ1k1-4XHRlMkPknxXb8j_1ZfnXY4gs
+ShortId:f7f9c2c4e327dc8a
+韩国:43.162.127.23:443
+UUID:759c36c5-ed36-4b3c-a5a0-94997d100432
+PublicKey:I0XvH-akUrxUdLed6scJvV3B_2edvRr-chG_8ocUAAc
+ShortId:2f0584f4180e8aa6
+我目前只看到这三个
+破解方案
+注册无限账号用他的逻辑直接连接，就可以使用，例如使用Xray连
+破解
+注册获取usertoken，获取节点，解析节点写入配置，直连
